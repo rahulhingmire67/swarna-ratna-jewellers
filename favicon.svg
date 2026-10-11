@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C89B3C"/>
+      <stop offset="50%" stop-color="#FCEAB3"/>
+      <stop offset="100%" stop-color="#9E711D"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F1A17"/>
+      <stop offset="100%" stop-color="#0E0A08"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Disc -->
+  <circle cx="32" cy="32" r="30" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="2"/>
+  
+  <!-- Royal Diamond / Jewellery Facet Emblem -->
+  <polygon points="32,10 48,22 42,48 32,54 22,48 16,22" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <polygon points="32,16 42,24 38,42 32,46 26,42 22,24" fill="url(#goldGrad)" opacity="0.25"/>
+  
+  <!-- Center Star Facet -->
+  <path d="M32 18 L34 28 L44 30 L34 32 L32 42 L30 32 L20 30 L30 28 Z" fill="url(#goldGrad)"/>
+</svg>
