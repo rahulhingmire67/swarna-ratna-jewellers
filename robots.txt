@@ -1,0 +1,10 @@
+# Robots.txt for Swarna Ratna Jewellers
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin.js
+Disallow: /admin.css
+Disallow: /api/
+
+# Sitemap Location
+Sitemap: https://swarnaratnajewellers.com/sitemap.xml

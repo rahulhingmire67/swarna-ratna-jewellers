@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Management Portal | Swarna Ratna Jewellers</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <span class="crest">✦</span>
+        <div class="brand-text">
+          <h2>SWARNA RATNA</h2>
+          <small>ADMIN CONSOLE</small>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#inventorySection" class="nav-btn active" data-tab="inventory">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Jewellery Products
+        </a>
+        <a href="#ratesSection" class="nav-btn" data-tab="rates">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="18" x2="12" y2="6"/></svg>
+          Today's Bullion Rates
+        </a>
+        <a href="#storeSection" class="nav-btn" data-tab="store">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Store Settings
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" class="view-site-link" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View Public Showroom
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Top Bar -->
+      <header class="admin-topbar">
+        <div class="topbar-title">
+          <h1 id="pageHeading">Product Inventory Management</h1>
+          <p class="subtitle">Add, edit, or publish products to your public showroom catalog</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-gold" id="openAddModalBtn">
+            + Add New Jewellery Piece
+          </button>
+        </div>
+      </header>
+
+      <!-- Key Stats Cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Active Showcase Pieces</span>
+          <div class="stat-value" id="statTotalItems">0</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Total Gold in Vault (g)</span>
+          <div class="stat-value" id="statTotalWeight">0g</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Today's 22K (916) Rate</span>
+          <div class="stat-value highlight" id="statRate22">₹7,040/g</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">WhatsApp Concierge</span>
+          <div class="stat-value small" id="statWhatsapp">Active</div>
+        </div>
+      </section>
+
+      <!-- Tab 1: Product Inventory -->
+      <section class="tab-pane active" id="inventoryPane">
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3>Showroom Products Catalog</h3>
+            <div class="table-search">
+              <input type="text" id="adminSearchInput" placeholder="Filter by product name, SKU, or category...">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Purity</th>
+                  <th>Weight (g)</th>
+                  <th>Showroom Price</th>
+                  <th>HUID Hallmark</th>
+                  <th>Featured</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryTableBody">
+                <!-- Injected via admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab 2: Daily Bullion Rates -->
+      <section class="tab-pane" id="ratesPane">
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3>Update Daily Bullion Rates</h3>
+            <p class="panel-sub">These rates display across the public site header and affect customer price calculations.</p>
+          </div>
+
+          <form id="bullionRatesForm" class="rates-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="adminRate24">24K Pure Gold (Per Gram)</label>
+                <div class="input-prefix">
+                  <span>₹</span>
+                  <input type="number" id="adminRate24" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="adminRate22">22K 916 Standard Gold (Per Gram)</label>
+                <div class="input-prefix">
+                  <span>₹</span>
+                  <input type="number" id="adminRate22" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="adminRate18">18K Diamond Jewellery Gold (Per Gram)</label>
+                <div class="input-prefix">
+                  <span>₹</span>
+                  <input type="number" id="adminRate18" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="adminRateSilver">Silver 999 (Per Gram)</label>
+                <div class="input-prefix">
+                  <span>₹</span>
+                  <input type="number" id="adminRateSilver" required>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold">Save Today's Rates</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Tab 3: Store Settings -->
+      <section class="tab-pane" id="storePane">
+        <div class="card-panel">
+          <div class="panel-header">
+            <h3>Showroom Profile & Contact Details</h3>
+          </div>
+
+          <form id="storeSettingsForm" class="store-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="adminStoreName">Showroom Name</label>
+                <input type="text" id="adminStoreName" required>
+              </div>
+
+              <div class="form-group">
+                <label for="adminStoreTagline">Brand Tagline / Established Year</label>
+                <input type="text" id="adminStoreTagline" required>
+              </div>
+
+              <div class="form-group">
+                <label for="adminWhatsapp">WhatsApp Number (e.g. 919876543210)</label>
+                <input type="text" id="adminWhatsapp" placeholder="Country code without + e.g. 919876543210" required>
+              </div>
+
+              <div class="form-group">
+                <label for="adminPhone">Phone Display Text</label>
+                <input type="text" id="adminPhone" placeholder="+91 98765 43210" required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="adminAddress">Boutique Address</label>
+                <input type="text" id="adminAddress" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold">Update Store Profile</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal: Add / Edit Product -->
+  <div class="admin-modal" id="productModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Jewellery Product</h3>
+        <button class="modal-close" id="closeProductModal">&times;</button>
+      </div>
+
+      <form id="productForm" class="product-form">
+        <input type="hidden" id="editProductId" value="">
+
+        <!-- Image Upload with Instant Preview -->
+        <div class="form-group">
+          <label class="required">Product Image</label>
+          <div class="file-picker-wrapper">
+            <input type="file" id="productFileInput" accept="image/*">
+            <span class="picker-hint">Or paste an online image URL below:</span>
+            <input type="url" id="productUrlInput" placeholder="https://images.example.com/jewellery.jpg">
+          </div>
+          <div class="admin-preview-box" id="adminPreviewBox" style="display: none;">
+            <img id="adminPreviewImg" src="" alt="Jewellery Preview">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="productTitle" class="required">Product Title / Name</label>
+            <input type="text" id="productTitle" placeholder="e.g. Royal Kundan Antique Choker" required>
+          </div>
+
+          <div class="form-group">
+            <label for="productCategory" class="required">Category</label>
+            <select id="productCategory" required>
+              <option value="Bridal">Bridal Sets</option>
+              <option value="Necklaces">Necklaces</option>
+              <option value="Earrings">Jhumkas & Earrings</option>
+              <option value="Bangles">Bangles & Kadas</option>
+              <option value="Mangalsutra">Mangalsutras</option>
+              <option value="Coins">Gold Coins</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="productPurity" class="required">Metal Purity</label>
+            <select id="productPurity" required>
+              <option value="22K BIS 916">22K BIS 916 Gold</option>
+              <option value="18K Diamond">18K Certified Diamond</option>
+              <option value="24K (999.9)">24K Pure Gold (999.9)</option>
+              <option value="92.5 Sterling Silver">92.5 Sterling Silver</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="productWeight" class="required">Net Gold Weight (Grams)</label>
+            <input type="number" id="productWeight" step="0.01" min="0.1" placeholder="e.g. 24.50" required>
+          </div>
+
+          <div class="form-group">
+            <label for="productPrice" class="required">Price (₹ INR)</label>
+            <input type="number" id="productPrice" min="100" placeholder="e.g. 185000" required>
+          </div>
+
+          <div class="form-group">
+            <label for="productHuid">BIS HUID / Certificate Code</label>
+            <input type="text" id="productHuid" placeholder="e.g. HUID-MH-916-4820">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productDesc">Description / Artisan Notes</label>
+          <textarea id="productDesc" rows="3" placeholder="Handcrafted with uncut polki, rubies, and floral Nakshi motifs..."></textarea>
+        </div>
+
+        <div class="checkbox-wrapper">
+          <label>
+            <input type="checkbox" id="productFeatured" checked>
+            <span>Highlight as Showcase Piece in Showroom</span>
+          </label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancelProductBtn">Cancel</button>
+          <button type="submit" class="btn btn-gold" id="saveProductBtn">Save to Showroom</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="admin-toast" id="adminToast"></div>
+
+  <!-- Shared Data & Admin Script -->
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
